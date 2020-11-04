@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  template:
+    image: hotio/cloudflare-ddns
+    container_name: cloudflare-ddns
+    hostname: cloudflare-ddns
+    restart: unless-stopped
+    volumes:
+      - ../Data/config:/config
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=America/Chicago
+      - INTERVAL=3600
+      - DETECTION_MODE=dig-whoami.cloudflare
+      - LOG_LEVEL=3
+      - APPRISE=changeme
+      - CF_APITOKEN=changeme
+      - CF_HOSTS=test.example.com;test2.example.com
+      - CF_ZONES=11111111111111111111111111111111;11111111111111111111111111111111
+      - CF_RECORDTYPES=A;A
